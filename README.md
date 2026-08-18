@@ -321,7 +321,7 @@ curl -X POST http://localhost:5000/api/detect/image \
 
 **Your Name**
 📧 your.email@example.com
-🔗 [LinkedIn](https://linkedin.com/in/your-profile) • [GitHub](https://github.com/your-username) • [Portfolio](https://your-portfolio.com)
+🔗 [LinkedIn](https://www.linkedin.com/in/yash-takalkar-5a364a284/) • [GitHub](https://github.com/Yash-0608) • [Portfolio](https://portfolio-website-one-xi-92.vercel.app/)
 
 ---
 
