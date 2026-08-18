@@ -21,3 +21,5 @@ backend/results/*
 
 # Jupyter
 .ipynb_checkpoints/
+
+yolo11n.pt
