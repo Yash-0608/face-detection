@@ -320,7 +320,7 @@ curl -X POST http://localhost:5000/api/detect/image \
 ## 👤 Author
 
 **Your Name**
-📧 your.email@example.com
+📧 yashtakalkar44@gmail.com
 🔗 [LinkedIn](https://www.linkedin.com/in/yash-takalkar-5a364a284/) • [GitHub](https://github.com/Yash-0608) • [Portfolio](https://portfolio-website-one-xi-92.vercel.app/)
 
 ---
