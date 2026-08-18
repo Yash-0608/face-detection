@@ -1,0 +1,75 @@
+body{
+
+    background:#111;
+
+    color:white;
+
+    font-family:Arial;
+
+    text-align:center;
+
+}
+
+
+
+.container{
+
+    margin-top:40px;
+
+}
+
+
+
+input{
+
+    margin:20px;
+
+}
+
+
+
+button{
+
+    padding:12px 25px;
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+
+
+.images{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:40px;
+
+    margin-top:40px;
+
+}
+
+
+
+img{
+
+    width:400px;
+
+    max-height:500px;
+
+    object-fit:contain;
+
+    border-radius:12px;
+
+    border:2px solid white;
+
+}

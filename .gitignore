@@ -1,0 +1,23 @@
+# Virtual Environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Dataset (do not upload)
+dataset/images/
+dataset/labels/
+
+# YOLO training outputs
+runs/
+
+# User uploaded images
+backend/uploads/*
+backend/results/*
+
+# Environment variables
+.env
+
+# Jupyter
+.ipynb_checkpoints/

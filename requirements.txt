@@ -1,0 +1,13 @@
+ultralytics
+opencv-python
+numpy
+Pillow
+
+Flask
+flask-cors
+python-dotenv
+
+pydantic
+requests
+
+pytest

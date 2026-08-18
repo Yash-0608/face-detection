@@ -1,0 +1,92 @@
+face-detection-web-app/
+│
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── Procfile
+├── runtime.txt
+├── .env.example
+│
+├── model/
+│   └── best.pt
+│
+├── backend/
+│   │
+│   ├── __init__.py
+│   ├── app.py
+│   ├── config.py
+│   │
+│   ├── routes/
+│   │   ├── __init__.py
+│   │   ├── detection_routes.py
+│   │   └── health_routes.py
+│   │
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── face_detector.py
+│   │   ├── image_processor.py
+│   │   └── webcam_service.py
+│   │
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   ├── validators.py
+│   │   └── response.py
+│   │
+│   └── api/
+│       ├── __init__.py
+│       └── schemas.py
+│
+├── frontend/
+│   │
+│   ├── templates/
+│   │   └── index.html
+│   │
+│   └── static/
+│       │
+│       ├── css/
+│       │   ├── style.css
+│       │   ├── upload.css
+│       │   ├── webcam.css
+│       │   └── responsive.css
+│       │
+│       ├── js/
+│       │   ├── app.js
+│       │   ├── upload.js
+│       │   ├── webcam.js
+│       │   └── api.js
+│       │
+│       └── assets/
+│           ├── logo.png
+│           └── icons/
+│
+├── dataset/
+│   ├── images/
+│   │   ├── train/
+│   │   ├── val/
+│   │   └── test/
+│   │
+│   └── labels/
+│       ├── train/
+│       ├── val/
+│       └── test/
+│
+├── training/
+│   ├── data.yaml
+│   ├── train.py
+│   ├── validate.py
+│   └── predict.py
+│
+├── notebooks/
+│   ├── 01_dataset.ipynb
+│   ├── 02_training.ipynb
+│   └── 03_evaluation.ipynb
+│
+├── tests/
+│   ├── test_detector.py
+│   ├── test_api.py
+│   └── test_upload.py
+│
+└── docs/
+    ├── architecture.md
+    ├── model.md
+    └── api.md
