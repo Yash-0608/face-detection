@@ -62,3 +62,51 @@ h2{font-size:21px;letter-spacing:-.5px;margin:0}
 .camera-footnote{font-size:10px;margin:15px 0 0}
 footer{display:flex;justify-content:space-between;gap:15px;padding:24px 2px 30px;color:#667894;font-size:9px;letter-spacing:1.2px}
 @media(max-width:680px){.app-shell{width:calc(100% - 24px)}.topbar{height:68px}.hero{padding:42px 0 27px}h1{letter-spacing:-1.2px}.image-grid{grid-template-columns:1fr}.image-stage{height:260px}.action-row{align-items:stretch;flex-direction:column}.primary-button{width:100%}.stats{flex-wrap:wrap}.mode-tab{padding:10px 12px}footer{font-size:8px}.camera-stage{min-height:230px}}
+
+
+/* Keep uploaded and annotated images inside the workspace instead of expanding the page. */
+.image-stage,
+.camera-stage {
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.image-stage img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 52vh;
+  object-fit: contain;
+  margin-inline: auto;
+}
+
+.camera-stage img,
+.camera-stage video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 65vh;
+  object-fit: contain;
+  margin-inline: auto;
+}
+
+.image-grid,
+.image-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 700px) {
+  .image-stage img {
+    max-height: 42vh;
+  }
+}
