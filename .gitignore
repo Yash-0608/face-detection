@@ -1,9 +1,12 @@
-# Virtual Environment
+# Virtual environments
+.venv/
 venv/
+env/
 
 # Python cache
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
 
 # Dataset (do not upload)
 dataset/images/
@@ -15,6 +18,8 @@ runs/
 # User uploaded images
 backend/uploads/*
 backend/results/*
+!backend/uploads/.gitkeep
+!backend/results/.gitkeep
 
 # Environment variables
 .env
@@ -22,4 +27,5 @@ backend/results/*
 # Jupyter
 .ipynb_checkpoints/
 
+# Downloaded base model
 yolo11n.pt
