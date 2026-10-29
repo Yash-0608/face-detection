@@ -1,78 +1,57 @@
-<!DOCTYPE html>
-
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-
-    <title>
-        Face Detection AI
-    </title>
-
-    <link rel="stylesheet" href="/style.css">
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Local AI face detection using a custom YOLO model.">
+  <title>FaceVision AI | Face Detection</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
-
-
 <body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="FaceVision home"><span class="brand-mark">FV</span><span>FaceVision <b>AI</b></span></a>
+      <span id="apiStatus" class="status status-checking"><span class="status-dot"></span> Checking model…</span>
+    </header>
 
+    <section class="hero">
+      <p class="eyebrow">COMPUTER VISION WORKSPACE</p>
+      <h1>Face detection, <span>made simple.</span></h1>
+      <p class="hero-copy">Upload a photo or use your webcam. Your image is processed locally by the project's YOLO model.</p>
+    </section>
 
-<div class="container">
+    <nav class="mode-tabs" aria-label="Detection mode">
+      <button class="mode-tab active" type="button" data-mode="image">Image detection</button>
+      <button class="mode-tab" type="button" data-mode="camera">Camera mode</button>
+    </nav>
 
+    <section id="imagePanel" class="panel">
+      <div class="panel-heading"><div><p class="eyebrow">01 / IMAGE</p><h2>Upload an image</h2></div><span class="panel-icon">↥</span></div>
+      <label id="dropZone" class="drop-zone" for="imageInput">
+        <span class="upload-icon">↑</span>
+        <strong>Choose an image or drop it here</strong>
+        <span>JPG, JPEG, PNG, WEBP or BMP · max 12 MB</span>
+        <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/bmp">
+      </label>
+      <div class="image-grid">
+        <article class="image-card"><div class="image-card-heading"><h3>Original image</h3><span>INPUT</span></div><div class="image-stage"><img id="preview" alt="Original image preview" hidden><p id="previewPlaceholder">Your selected image will appear here</p></div></article>
+        <article class="image-card"><div class="image-card-heading"><h3>Detection result</h3><span>OUTPUT</span></div><div class="image-stage"><img id="result" alt="Image with detected faces" hidden><p id="resultPlaceholder">Bounding boxes will appear here</p></div></article>
+      </div>
+      <div class="action-row"><p id="imageMessage" class="message" role="status">Select an image to get started.</p><button id="detectButton" class="primary-button" type="button" disabled>Detect faces <span>→</span></button></div>
+      <div id="resultStats" class="stats" hidden><div><span>Faces detected</span><strong id="faceCount">0</strong></div><div><span>Detection confidence</span><strong id="confidenceText">—</strong></div></div>
+    </section>
 
-<h1>
-    Face Detection AI
-</h1>
+    <section id="cameraPanel" class="panel" hidden>
+      <div class="panel-heading"><div><p class="eyebrow">02 / LIVE CAMERA</p><h2>Detect faces in real time</h2></div><span class="panel-icon">◎</span></div>
+      <p class="camera-note">Allow camera access when your browser asks. Frames are sent to the local Flask server for detection; click Stop when finished.</p>
+      <div class="camera-stage"><video id="cameraVideo" autoplay muted playsinline hidden></video><img id="cameraResult" alt="Latest processed camera frame" hidden><p id="cameraPlaceholder">Camera preview will appear here</p><canvas id="cameraCanvas" hidden></canvas></div>
+      <div class="action-row"><p id="cameraMessage" class="message" role="status">Camera is stopped.</p><div class="button-group"><button id="startCamera" class="primary-button" type="button">Start camera <span>→</span></button><button id="stopCamera" class="secondary-button" type="button" disabled>Stop</button></div></div>
+      <p class="camera-footnote">Live detection runs at a reduced frame rate to avoid overwhelming your CPU/GPU.</p>
+    </section>
 
-
-<input 
-type="file"
-id="imageInput"
-accept="image/*"
->
-
-
-<button onclick="detectFace()">
-    Detect Face
-</button>
-
-
-
-<div class="images">
-
-
-<div>
-
-<h3>
-Original
-</h3>
-
-<img id="preview">
-
-</div>
-
-
-
-<div>
-
-<h3>
-Detected Result
-</h3>
-
-<img id="result">
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-<script src="/script.js"></script>
-
-
+    <footer><span>FACEVISION AI</span><span>Flask · OpenCV · Ultralytics YOLO</span></footer>
+  </main>
+  <script src="/script.js" defer></script>
 </body>
-
 </html>
