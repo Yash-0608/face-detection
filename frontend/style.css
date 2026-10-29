@@ -110,3 +110,27 @@ body {
     max-height: 42vh;
   }
 }
+
+
+/* Explicit display-size cap for uploaded and annotated images. */
+#preview,#result,#cameraResult,#outputImage,#resultImage,.result-image,.output-image,
+.detection-result img,.result-container img,#resultContainer img,#outputContainer img {
+  display:block;
+  width:auto !important;
+  max-width:min(600px,100%) !important;
+  height:auto !important;
+  max-height:400px !important;
+  object-fit:contain !important;
+  margin:0 auto;
+}
+.image-stage,.result-container,.detection-result,#resultContainer,#outputContainer {
+  max-width:100%;
+  overflow:hidden;
+}
+@media(max-width:700px) {
+  #preview,#result,#cameraResult,#outputImage,#resultImage,.result-image,.output-image,
+  .detection-result img,.result-container img,#resultContainer img,#outputContainer img {
+    max-width:100% !important;
+    max-height:300px !important;
+  }
+}
