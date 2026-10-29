@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+import time
 import uuid
 from pathlib import Path
-import time
 
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
@@ -19,17 +19,14 @@ UPLOAD_FOLDER = BASE_DIR / "backend" / "uploads"
 RESULT_FOLDER = BASE_DIR / "backend" / "results"
 ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "webp", "bmp"}
 MAX_IMAGE_BYTES = 12 * 1024 * 1024
+APP_VERSION = "2026.10.29.2"
 
 UPLOAD_FOLDER.mkdir(parents=True, exist_ok=True)
 RESULT_FOLDER.mkdir(parents=True, exist_ok=True)
 
-# Serve /style.css and /script.js to match the paths in frontend/index.html.
-app = Flask(
-    __name__,
-    static_folder=str(FRONTEND_DIR),
-    static_url_path="",
-)
+app = Flask(__name__, static_folder=str(FRONTEND_DIR), static_url_path="")
 app.config["MAX_CONTENT_LENGTH"] = MAX_IMAGE_BYTES
+app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
 CORS(app)
 
 
@@ -51,12 +48,20 @@ def cleanup_old_files(folder: Path, max_age_seconds: int = 1800) -> None:
 @app.get("/")
 @app.get("/workspace")
 def workspace():
-    return send_from_directory(FRONTEND_DIR, "index.html")
+    response = send_from_directory(FRONTEND_DIR, "index.html", max_age=0)
+    response.headers["X-FaceVision-Version"] = APP_VERSION
+    return response
 
 
 @app.get("/api/health")
 def health():
-    return jsonify({"status": "ok", "model": "model/best.pt"})
+    return jsonify({
+        "status": "ok",
+        "app_version": APP_VERSION,
+        "project_root": str(BASE_DIR),
+        "model": str((BASE_DIR / "model" / "best.pt").relative_to(BASE_DIR)),
+        "model_file_exists": (BASE_DIR / "model" / "best.pt").is_file(),
+    })
 
 
 @app.post("/detect")
@@ -80,6 +85,8 @@ def detect():
         cleanup_old_files(RESULT_FOLDER)
         image.save(input_path)
         detection = detect_faces(input_path, output_path)
+        if not output_path.is_file():
+            raise RuntimeError("Detection completed without creating an output image.")
         return jsonify({
             "message": "Detection completed",
             "result": f"/results/{output_path.name}",
@@ -99,7 +106,7 @@ def detect():
 
 @app.get("/results/<path:filename>")
 def results(filename: str):
-    return send_from_directory(RESULT_FOLDER, filename)
+    return send_from_directory(RESULT_FOLDER, filename, max_age=0)
 
 
 @app.errorhandler(413)
@@ -108,4 +115,9 @@ def request_too_large(_error):
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    print(f"FaceVision app version: {APP_VERSION}")
+    print(f"Repository directory: {BASE_DIR}")
+    print(f"Frontend directory: {FRONTEND_DIR}")
+    print(f"Model file exists: {(BASE_DIR / 'model' / 'best.pt').is_file()}")
+    print("Open http://127.0.0.1:5000 (stop any older server using port 5000 first).")
+    app.run(host="127.0.0.1", port=5000, debug=False)
